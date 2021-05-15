@@ -158,6 +158,8 @@ def trip_duration_stats(df, city):
     travel_time = df['Trip Duration'].sum()
 
     #Breaking down total travel time into more understandable statistics, as opposed to a huge number of seconds.
+    #using "int()" allows us to define the integer-amount of years, days, hours, minutes, and seconds.
+    #using the "%" operator allows us to take the remainder of the larger time increments and use it to calculate the next step down.
     int_yrs = int(travel_time / (365*24*60*60))
     year_remainder = travel_time % (365*24*60*60)
     int_days = int(year_remainder / (24*60*60))
