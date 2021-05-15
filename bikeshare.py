@@ -249,9 +249,12 @@ def main():
     while True:
 
         print('-'*40)
+
+        yes_list = ['yes','y']
+
         city, month, day, should_exit = get_filters()
         #should_exit is a string that determines if we should exit the program based on input from the user in get_filters.
-        if should_exit != "n" and should_exit != "no":
+        if should_exit.lower() in yes_list:
 
             df = load_data(city, month, day)
             time_stats(df, month, day, city)
@@ -266,7 +269,7 @@ def main():
                 sample_data = input('\n{} is an invalid input, would you like to see the raw data?  Enter yes or no:  '.format(sample_data))
 
             #does user want to see raw data... will call "raw_data" function to display with code below.
-            if sample_data.lower() == "yes" or sample_data.lower() == "y":
+            if sample_data.lower() in yes_list:
                 raw_data(df, acceptable_list)
             else:
                 print('\nSkipping raw data display...')
@@ -275,7 +278,7 @@ def main():
             while restart.lower() not in acceptable_list:
                 restart = input('\n{} is an invalid input, would you like to restart? Enter yes or no:  '.format(restart))
 
-            if restart.lower() != 'yes' and restart.lower() != "y":  #This works because only no or yes can get passed from loop above.
+            if restart.lower() not in yes_list:  #This works because only no or yes can get passed from loop above.
                 break
 
 if __name__ == "__main__":
