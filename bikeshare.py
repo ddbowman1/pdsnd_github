@@ -17,7 +17,7 @@ CITY_DATA = { 'chicago': 'chicago.csv',
               'washington': 'washington.csv' }
 
 
-def get_filters():
+def get_filters(city_list):
     """
     Asks user to specify a city, month, and day to analyze.
 
@@ -30,7 +30,7 @@ def get_filters():
 
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     city = input('\nPlease select a city, between Chicago, New York City, or Washington:  ').lower()
-    while city != "chicago" and city != "new york city" and city != "washington":
+    while city not in city_list:
         if city == "exit":
             exit()
         else:
@@ -251,8 +251,9 @@ def main():
         print('-'*40)
 
         yes_list = ['yes','y']
+        city_list = ['chicago','new york city','washington']
 
-        city, month, day, should_exit = get_filters()
+        city, month, day, should_exit = get_filters(city_list)
         #should_exit is a string that determines if we should exit the program based on input from the user in get_filters.
         if should_exit.lower() in yes_list:
 
