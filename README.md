@@ -7,7 +7,13 @@ May 10th, 2021
 Bikeshare Analysis of Washington, New York City, and Chicago
 
 ### Description
-Describe what your project is about and what it does
+This project will take bikeshare data from Washington, NYC, and Chicago, and based on the input provided for day of week and month, will calculate multiple statistics.  Some of the information calculated include:
+1)  Most frequent times of travel
+2)  Most popular stations traveled from and to, and the most popular pair
+3)  Average trip durations
+4)  Gender status, subscription status, birth datetime
+
+... among others.
 
 ### Files used
 Include the files used
