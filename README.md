@@ -16,7 +16,16 @@ This project will take bikeshare data from Washington, NYC, and Chicago, and bas
 ... among others.
 
 ### Files used
-Include the files used
+chicago.csv
+new_york_city.csv
+washington.csv
+bikeshare.py
 
 ### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
+Websites used as reference for some of the ideas I came up with:
+https://stackoverflow.com/questions/11847341/while-not-in-list
+https://stackoverflow.com/questions/60339049/weekday-name-from-a-pandas-dataframe-date-object
+https://stackoverflow.com/questions/48590268/pandas-get-the-most-frequent-values-of-a-column
+https://stackoverflow.com/questions/53037698/how-can-i-find-the-most-frequent-two-column-combination-in-a-dataframe-in-python
+https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.iloc.html
+https://www.kite.com/python/examples/2645/pandas-get-the-raw-data-from-a-%60dataframe%60-as-a-list-of-rows
