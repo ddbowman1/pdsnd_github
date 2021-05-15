@@ -261,6 +261,7 @@ def main():
             trip_duration_stats(df, city)
             user_stats(df, city)
 
+            #describes list of all acceptable inputs from user when prompted with yes/no
             acceptable_list = ['yes','y','no','n']
 
             sample_data = input('\nWould you like to see the raw data?  Enter yes or no:  \n')
