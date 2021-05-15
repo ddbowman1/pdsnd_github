@@ -17,7 +17,7 @@ CITY_DATA = { 'chicago': 'chicago.csv',
               'washington': 'washington.csv' }
 
 
-def get_filters():
+def get_filters(city_list, acceptable_list):
     """
     Asks user to specify a city, month, and day to analyze.
 
@@ -30,7 +30,7 @@ def get_filters():
 
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     city = input('\nPlease select a city, between Chicago, New York City, or Washington:  ').lower()
-    while city != "chicago" and city != "new york city" and city != "washington":
+    while city not in city_list:
         if city == "exit":
             exit()
         else:
@@ -57,6 +57,13 @@ def get_filters():
     #Adding option to exit so user can start over
     should_exit = ""
     should_exit = input('\nYou chose {}, {}, and {}, is this correct?  Enter yes or no:  '.format(city.title(), month.title(), day.title())).lower()
+
+    #should_exit is a string that determines if we should exit the program based on input from the user in get_filters.
+    while should_exit not in acceptable_list:
+        if should_exit == "exit":
+            exit()
+        else:
+            should_exit = input('\n{} is an invalid input, please enter yes, no, or exit:  '.format(should_exit)).lower()
 
     print('-'*40)
     return city, month, day, should_exit
@@ -251,9 +258,15 @@ def main():
     while True:
 
         print('-'*40)
-        city, month, day, should_exit = get_filters()
+
+        acceptable_list = ['yes','y','no','n']
+        yes_list = ['yes','y']
+        city_list = ['chicago','new york city','washington']
+
+        city, month, day, should_exit = get_filters(city_list, acceptable_list)
+
         #should_exit is a string that determines if we should exit the program based on input from the user in get_filters.
-        if should_exit != "n" and should_exit != "no":
+        if should_exit.lower() in yes_list:
 
             df = load_data(city, month, day)
             time_stats(df, month, day, city)
@@ -261,15 +274,12 @@ def main():
             trip_duration_stats(df, city)
             user_stats(df, city)
 
-            #describes list of all acceptable inputs from user when prompted with yes/no
-            acceptable_list = ['yes','y','no','n']
-
             sample_data = input('\nWould you like to see the raw data?  Enter yes or no:  \n')
             while sample_data.lower() not in acceptable_list:
                 sample_data = input('\n{} is an invalid input, would you like to see the raw data?  Enter yes or no:  '.format(sample_data))
 
             #does user want to see raw data... will call "raw_data" function to display with code below.
-            if sample_data.lower() == "yes" or sample_data.lower() == "y":
+            if sample_data.lower() in yes_list:
                 raw_data(df, acceptable_list)
             else:
                 print('\nSkipping raw data display...')
@@ -278,7 +288,7 @@ def main():
             while restart.lower() not in acceptable_list:
                 restart = input('\n{} is an invalid input, would you like to restart? Enter yes or no:  '.format(restart))
 
-            if restart.lower() != 'yes' and restart.lower() != "y":  #This works because only no or yes can get passed from loop above.
+            if restart.lower() not in yes_list:  #This works because only no or yes can get passed from loop above.
                 break
 
 if __name__ == "__main__":
