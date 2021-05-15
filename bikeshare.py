@@ -17,7 +17,7 @@ CITY_DATA = { 'chicago': 'chicago.csv',
               'washington': 'washington.csv' }
 
 
-def get_filters(city_list):
+def get_filters(city_list, acceptable_list):
     """
     Asks user to specify a city, month, and day to analyze.
 
@@ -57,6 +57,13 @@ def get_filters(city_list):
     #Adding option to exit so user can start over
     should_exit = ""
     should_exit = input('\nYou chose {}, {}, and {}, is this correct?  Enter yes or no:  '.format(city.title(), month.title(), day.title())).lower()
+
+    #should_exit is a string that determines if we should exit the program based on input from the user in get_filters.
+    while should_exit not in acceptable_list:
+        if should_exit == "exit":
+            exit()
+        else:
+            should_exit = input('\n{} is an invalid input, please enter yes, no, or exit:  '.format(should_exit)).lower()
 
     print('-'*40)
     return city, month, day, should_exit
@@ -250,10 +257,12 @@ def main():
 
         print('-'*40)
 
+        acceptable_list = ['yes','y','no','n']
         yes_list = ['yes','y']
         city_list = ['chicago','new york city','washington']
 
-        city, month, day, should_exit = get_filters(city_list)
+        city, month, day, should_exit = get_filters(city_list, acceptable_list)
+
         #should_exit is a string that determines if we should exit the program based on input from the user in get_filters.
         if should_exit.lower() in yes_list:
 
@@ -262,8 +271,6 @@ def main():
             station_stats(df, city)
             trip_duration_stats(df, city)
             user_stats(df, city)
-
-            acceptable_list = ['yes','y','no','n']
 
             sample_data = input('\nWould you like to see the raw data?  Enter yes or no:  \n')
             while sample_data.lower() not in acceptable_list:
